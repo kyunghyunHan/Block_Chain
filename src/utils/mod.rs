@@ -1,1 +1,3 @@
-pub mod serialize;
+mod serializer;
+
+pub use serializer::*;
