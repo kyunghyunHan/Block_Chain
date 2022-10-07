@@ -1,5 +1,7 @@
 mod block;
-mod blockchains;
+mod blockchain;
+mod pow;
 
 pub use block::Block;
-pub use blockchains::Blockchain;
+pub use blockchain::Blockchain;
+pub use pow::ProofOfWork;

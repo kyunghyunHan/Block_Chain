@@ -1,4 +1,4 @@
-use blockchain::Blockchain;
+use block_chain::Blockchain;
 fn main() {
     tracing_subscriber::fmt().init();
 
