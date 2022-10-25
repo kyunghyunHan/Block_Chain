@@ -10,7 +10,10 @@ pub struct BlockHeader {
     bits: usize,
     nonce: usize,
 }
-
+//블록헤더
+//타임스탬프:시간저장
+//prev_hash이전해시값 저장
+//nonce : 저장
 impl BlockHeader {
     fn new(prev_hash: &str, bits: usize) -> Self {
         Self {
@@ -28,7 +31,9 @@ pub struct Block {
     data: String,
     hash: String,
 }
-
+//:블록헤더 저장
+//트랙잭션 저장
+//해시값 저장
 impl Block {
     pub fn new(data: &str, prev_hash: &str, bits: usize) -> Self {
         let mut block = Block {
