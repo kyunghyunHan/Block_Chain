@@ -15,11 +15,16 @@ pub struct BlockHeader {
 //prev_hash이전해시값 저장
 //nonce : 저장
 impl BlockHeader {
+    //새로운 블록헤더
     fn new(prev_hash: &str, bits: usize) -> Self {
         Self {
+            //현제시간저장
             timestamp: Utc::now().timestamp(),
+            //이전해시값
             prev_hash: prev_hash.into(),
+            //
             bits,
+            //난수
             nonce: 0,
         }
     }
@@ -51,19 +56,19 @@ impl Block {
     pub fn create_genesis_block(bits: usize) -> Self {
         Self::new("제네시스 블록", "", bits)
     }
-
+    //해시블러오기
     pub fn get_hash(&self) -> String {
         self.hash.clone()
     }
-
+    //헤더 불러오기
     pub fn get_header(&self) -> BlockHeader {
         self.header.clone()
     }
-
+    //난수 저장
     pub fn set_nonce(&mut self, nonce: usize) {
         self.header.nonce = nonce;
     }
-
+    //해시저장
     pub fn set_hash(&mut self, hash: String) {
         self.hash = hash;
     }
