@@ -35,6 +35,7 @@ pub struct Block {
 //트랙잭션 저장
 //해시값 저장
 impl Block {
+    //블록생성
     pub fn new(data: &str, prev_hash: &str, bits: usize) -> Self {
         let mut block = Block {
             header: BlockHeader::new(prev_hash, bits),
@@ -46,7 +47,7 @@ impl Block {
 
         block
     }
-
+    //제네시스 블록 생성
     pub fn create_genesis_block(bits: usize) -> Self {
         Self::new("제네시스 블록", "", bits)
     }

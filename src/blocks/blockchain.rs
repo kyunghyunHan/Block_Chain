@@ -8,7 +8,8 @@ use tracing::info;
 use crate::{Block, SledDb, Storage};
 
 pub const CURR_BITS: usize = 8;
-
+//블록:블록컨벤션
+//height:블록체인의 높이,블록의 수
 pub struct Blockchain<T = SledDb> {
     storage: T,
     tip: Arc<RwLock<String>>,
@@ -36,7 +37,7 @@ impl<T: Storage> Blockchain<T> {
             }
         }
     }
-
+    //블록을 체인에 추가
     pub fn mine_block(&mut self, data: &str) {
         let block = Block::new(data, &self.tip.read().unwrap(), CURR_BITS);
         let hash = block.get_hash();
@@ -46,8 +47,7 @@ impl<T: Storage> Blockchain<T> {
 
         let mut tip = self.tip.write().unwrap();
         *tip = hash;
-    }
-
+    } // 블록 가입
     pub fn blocks_info(&self) {
         let blocks = self.storage.get_block_iter().unwrap();
         for block in blocks {
