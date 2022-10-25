@@ -7,7 +7,6 @@ fn main() {
 
     let path = current_dir().unwrap().join("data");
     let mut bc = Blockchain::new(SledDb::new(path));
-
-    bc.mine_block("Justin -> Bob 2 btc");
     bc.blocks_info();
+    bc.mine_block("Justin -> Bob 2 btc");
 }

@@ -43,7 +43,7 @@ impl Block {
     }
 
     pub fn create_genesis_block(bits: usize) -> Self {
-        Self::new("创世区块", "", bits)
+        Self::new("제네시스 블록", "", bits)
     }
 
     pub fn get_hash(&self) -> String {
