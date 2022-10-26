@@ -12,6 +12,8 @@ use crate::{Block, SledDb, Storage};
 pub const CURR_BITS: usize = 8;
 //블록:블록컨벤션
 //height:블록체인의 높이,블록의 수
+
+// 기본적으로 sled 데이터베이스 사용
 pub struct Blockchain<T = SledDb> {
     storage: T,
     tip: Arc<RwLock<String>>,
@@ -20,6 +22,8 @@ pub struct Blockchain<T = SledDb> {
 
 impl<T: Storage> Blockchain<T> {
     pub fn new(storage: T) -> Self {
+        // 데이터베이스에 tip 값이 있으면 메모리에 로드합니다.
+        // 그렇지 않으면 제네시스 블록을 생성하고 데이터베이스에 업데이트합니다.
         if let Ok(Some(tip)) = storage.get_tip() {
             let height = storage.get_height().unwrap();
             Self {
