@@ -2,7 +2,7 @@ use chrono::Utc;
 use serde::{Deserialize, Serialize};
 
 use crate::ProofOfWork;
-
+//블록 헤더에 비트 및  논스 필드 추가
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone, Default)]
 pub struct BlockHeader {
     timestamp: i64,
@@ -14,6 +14,9 @@ pub struct BlockHeader {
 //타임스탬프:시간저장
 //prev_hash이전해시값 저장
 //nonce : 저장
+//bit:난이도,해시값의 첫번쨰 비트가 0인수를 계산
+//bit의 난이도를 충족시키기 위해 계산이 반복되는 횟수
+
 impl BlockHeader {
     //새로운 블록헤더
     fn new(prev_hash: &str, bits: usize) -> Self {

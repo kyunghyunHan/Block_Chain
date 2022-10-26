@@ -14,13 +14,16 @@ pub struct ProofOfWork {
 
 impl ProofOfWork {
     pub fn new(bits: usize) -> Self {
+        //여기서 bigint 라이브러리의 U256이 사용되며 처음에는 1로 초기화
         let mut target = U256::from(1 as usize);
+        //1을 왼쪽으로 256비트 시프트하고 비트가 8이면 왼쪽으로 248비트 시프트
         target = target.shl(256 - bits);
 
         Self { target }
     }
 
     pub fn run(&self, block: &mut Block) {
+        //계산 오버플로를 방지하려면 MAX_NONCE를 사용하여 size::MAX로 설정
         let mut nonce = 0;
         while nonce < MAX_NONCE {
             if let Ok(pre_hash) = Self::prepare_data(block, nonce) {
@@ -28,6 +31,8 @@ impl ProofOfWork {
                 hash_to_u8(&pre_hash, &mut hash_u);
                 let pre_hash_int = U256::from(hash_u);
 
+                // 계산된 해시 값이 목표보다 작으면 조건을 만족하고 루프를 점프 아웃
+                // 그렇지 않으면 nonce가 1씩 증가하고 다음 해시 계산이 입력
                 if pre_hash_int.lt(&(self.target)) {
                     block.set_hash(hash_to_str(&pre_hash));
                     break;
@@ -37,7 +42,7 @@ impl ProofOfWork {
             }
         }
     }
-
+    //블록 헤더를 직렬화하기 위해 nonce 값을 설정
     fn prepare_data(block: &mut Block, nonce: usize) -> Result<Vec<u8>> {
         block.set_nonce(nonce);
         Ok(serialize(&(block.get_header()))?)

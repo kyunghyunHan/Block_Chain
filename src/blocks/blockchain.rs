@@ -6,7 +6,9 @@ use std::sync::{
 use tracing::info;
 
 use crate::{Block, SledDb, Storage};
-
+//8로 하드코딩
+///계산된 블록 해시 값의 처음 비트는 0
+///
 pub const CURR_BITS: usize = 8;
 //블록:블록컨벤션
 //height:블록체인의 높이,블록의 수
