@@ -41,6 +41,12 @@ impl<T: Storage> Blockchain<T> {
     }
 
     pub fn mine_block(&mut self, txs: &[Transaction]) {
+        for tx in txs {
+            if tx.verify(self) == false {
+                panic!("ERROR: Invalid transaction")
+            }
+        }
+
         let block = Block::new(txs, &self.tip.read().unwrap(), CURR_BITS);
         let hash = block.get_hash();
         self.height.fetch_add(1, Ordering::Relaxed);
@@ -86,6 +92,18 @@ impl<T: Storage> Blockchain<T> {
         }
 
         utxo
+    }
+
+    pub fn find_transaction(&self, txid: String) -> Option<Transaction> {
+        let blocks = self.storage.get_block_iter().unwrap();
+        for block in blocks {
+            for tx in block.get_tranxs() {
+                if tx.get_id() == txid {
+                    return Some(tx);
+                }
+            }
+        }
+        None
     }
 
     pub fn blocks_info(&self) {
