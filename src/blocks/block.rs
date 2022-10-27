@@ -1,6 +1,8 @@
 use chrono::Utc;
+//시간 라이브러리
+//UTC:UTC 시간대를 지정,가장 효율적
 use serde::{Deserialize, Serialize};
-
+//일반 직렬화/역직렬화 프레임워크
 use crate::{
     utils::{hash_to_str, serialize},
     ProofOfWork, Transaction,
@@ -27,7 +29,10 @@ pub struct BlockHeader {
 impl BlockHeader {
     fn new(prev_hash: &str, bits: usize) -> Self {
         Self {
+            //초단위
             timestamp: Utc::now().timestamp(),
+            //입력 값을 사용하는 값 ​​대 값 변환
+            //from은 받는쪽에서 부르는거고, into는 보내는쪽에서 부르는것
             prev_hash: prev_hash.into(),
             txs_hash: String::new(),
             bits,
