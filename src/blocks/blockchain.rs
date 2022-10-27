@@ -9,8 +9,12 @@ use std::{
 use tracing::info;
 
 use crate::{error::BlockchainError, Block, SledDb, Storage, Transaction, Txoutput};
-
+//비트는 8비트로 하드코딩,계산된 블록 해시값의 처음 비트는 0
+//이 블록은 블록체인에 추가될수 있다.
 pub const CURR_BITS: usize = 8;
+//블록을 메모리 저장후 나중에 데이터베이스에 저장
+//블록:블록컬렉션
+//블록체인의높이,블록의 수
 
 #[derive(Debug, Default)]
 pub struct Blockchain<T = SledDb> {
@@ -46,7 +50,7 @@ impl<T: Storage> Blockchain<T> {
         let mut tip = self.tip.write().unwrap();
         *tip = hash;
     }
-
+    //블록체인에 추가
     pub fn mine_block(&mut self, txs: &[Transaction]) -> Block {
         for tx in txs {
             if tx.verify(self) == false {

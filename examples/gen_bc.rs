@@ -17,6 +17,6 @@ fn main() {
 
     let utxos = UTXOSet::new(storage);
     utxos.reindex(&bc).unwrap();
-
+    //블록 가입
     bc.blocks_info();
 }

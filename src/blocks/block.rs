@@ -6,6 +6,15 @@ use crate::{
     ProofOfWork, Transaction,
 };
 
+/*
+블록헤더
+타임스탬프:시간
+prev_hash:이전시간
+nonce:작업증명을 계산하는데 사용하는 난수
+bits:난이도,즉 블록 해시 값의 첫번쨰 비트가 0인수를 계산
+nonce:비트의 난이도를 충족시키기 위해 계산이 반복되는 횟수
+ */
+
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone, Default)]
 pub struct BlockHeader {
     timestamp: i64,
@@ -26,7 +35,14 @@ impl BlockHeader {
         }
     }
 }
+/*
+블록
+- 헤더 :블록헤더
+- tranxs : 트랜잭션 집합
+- hash:블록의 해시값
+각 블록의 해시값을 계산하여 저장하고 이전 블록의 해시를 블록 헤더에 저장하여 블록체인을 형성
 
+*/
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct Block {
     header: BlockHeader,
@@ -48,7 +64,8 @@ impl Block {
 
         block
     }
-
+    //제네시스 블록 구현
+    //첫번쨰 블록이므로 블록헤더의 prev_hash에는 값이 없다.
     pub fn create_genesis_block(bits: usize, genesis_addr: &str) -> Self {
         let coinbase = Transaction::new_coinbase(genesis_addr);
         Self::new(&vec![coinbase], "", bits)
