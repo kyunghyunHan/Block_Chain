@@ -1,7 +1,14 @@
 use serde::{Deserialize, Serialize};
 
 use crate::hash_pub_key;
+/*
+거래 입력
+txid: 이전 트랜잭션의 ID
+vout: 이전 트랜잭션 출력의 일련 번호
+from_addr: 트랜잭션 개시자 다음 부분에서 지갑 기능이 구현되면 트랜잭션 개시자의 공개키로 대체
 
+
+*/
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct Txinput {
     txid: String,

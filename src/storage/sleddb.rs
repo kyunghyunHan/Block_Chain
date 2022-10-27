@@ -46,6 +46,7 @@ impl Storage for SledDb {
         result.map_or(Ok(None), |v| v.map(Some))
     }
 
+    // 트랜잭션 사용
     fn update_blocks(&self, key: &str, block: &Block, height: usize) {
         let _: TransactionResult<(), ()> = self.db.transaction(|db| {
             let name = Self::get_full_key(TABLE_OF_BLOCK, key);
@@ -62,7 +63,7 @@ impl Storage for SledDb {
         let iter = StorageIterator::new(self.db.scan_prefix(prefix));
         Ok(Box::new(iter))
     }
-
+    // utxo 컬렉션 가져오기
     fn get_utxo_set(&self) -> HashMap<String, Vec<crate::Txoutput>> {
         let mut map = HashMap::new();
 
@@ -79,13 +80,13 @@ impl Storage for SledDb {
 
         map
     }
-
+    // utxo 컬렉션을 데이터베이스에 작성
     fn write_utxo(&self, txid: &str, outs: Vec<crate::Txoutput>) -> Result<(), BlockchainError> {
         let name = format!("{}:{}", UTXO_SET, txid);
         self.db.insert(name, serialize(&outs)?)?;
         Ok(())
     }
-
+    // utxo 컬렉션 지우기
     fn clear_utxo_set(&self) {
         let prefix = format!("{}:", UTXO_SET);
         self.db.remove(prefix).unwrap();

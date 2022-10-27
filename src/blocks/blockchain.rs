@@ -15,7 +15,7 @@ pub const CURR_BITS: usize = 8;
 //블록을 메모리 저장후 나중에 데이터베이스에 저장
 //블록:블록컬렉션
 //블록체인의높이,블록의 수
-
+//sled 데이터베이스를 사용
 #[derive(Debug, Default)]
 pub struct Blockchain<T = SledDb> {
     storage: Arc<T>,
@@ -25,6 +25,8 @@ pub struct Blockchain<T = SledDb> {
 
 impl<T: Storage> Blockchain<T> {
     pub fn new(storage: Arc<T>) -> Self {
+        // 데이터베이스에 tip 값이 있으면 메모리에 로드
+        // 그렇지 않으면 제네시스 블록을 생성하고 데이터베이스에 업데이트
         if let Ok(Some(tip)) = storage.get_tip() {
             let height = storage.get_height().unwrap();
             Self {

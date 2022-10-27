@@ -1,7 +1,11 @@
 use serde::{Deserialize, Serialize};
 
 use crate::{utils::base58_decode, ADDRESS_CHECKSUM_LEN};
-
+/*
+트랜잭션 출력
+가치: 거래 가치
+to_addr: 트랜잭션 수신자로 다음 부분에서 지갑 기능이 구현되면 트랜잭션 수신자의 공개 키 해시로 대체
+*/
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct Txoutput {
     value: i32,

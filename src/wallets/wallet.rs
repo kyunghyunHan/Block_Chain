@@ -4,7 +4,11 @@ use serde::{Deserialize, Serialize};
 
 const VERSION: u8 = 0x00;
 pub const ADDRESS_CHECKSUM_LEN: usize = 4;
-
+/*
+지갑
+pkcs8: 개인 키
+public_key: 공개 키
+*/
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Wallet {
     pkcs8: Vec<u8>,

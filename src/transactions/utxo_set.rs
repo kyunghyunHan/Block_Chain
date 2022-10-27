@@ -10,7 +10,7 @@ impl<T: Storage> UTXOSet<T> {
     pub fn new(storage: Arc<T>) -> Self {
         Self { storage }
     }
-
+    // 새 블록이 생성되면 UTXO 세트 인덱스를 다시 작성
     pub fn reindex(&self, bc: &Blockchain<T>) -> Result<(), BlockchainError> {
         self.storage.clear_utxo_set();
         let map = bc.find_utxo();
@@ -20,6 +20,7 @@ impl<T: Storage> UTXOSet<T> {
         Ok(())
     }
 
+    // 트랜잭션 개시자가 소비할 수 있는 트랜잭션 출력을 찾기
     pub fn find_spendable_outputs(
         &self,
         public_key_hash: &[u8],
