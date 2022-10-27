@@ -4,7 +4,7 @@ use block_chain::{Blockchain, SledDb, UTXOSet, Wallets};
 
 fn main() {
     tracing_subscriber::fmt().init();
-
+    // 주소를 만들고 주소를 기록
     let mut wallets = Wallets::new().unwrap();
     let genesis_addr = wallets.create_wallet();
     println!("==> genesis address: {}", genesis_addr);

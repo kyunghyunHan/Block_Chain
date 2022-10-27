@@ -4,7 +4,7 @@ use block_chain::{Blockchain, SledDb, Transaction, UTXOSet, Wallets};
 
 fn main() {
     tracing_subscriber::fmt().init();
-
+    // 주소를 사용하여 거래
     let justin_addr = "1527MzPRt2eTh9GGrHKRX3qkCj6oA4w54F";
 
     let mut wallets = Wallets::new().unwrap();

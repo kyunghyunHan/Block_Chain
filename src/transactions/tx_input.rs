@@ -6,7 +6,8 @@ use crate::hash_pub_key;
 txid: 이전 트랜잭션의 ID
 vout: 이전 트랜잭션 출력의 일련 번호
 from_addr: 트랜잭션 개시자 다음 부분에서 지갑 기능이 구현되면 트랜잭션 개시자의 공개키로 대체
-
+서명: 트랜잭션 개시자의 개인 키로 트랜잭션의 서명
+pub_key: 트랜잭션 개시자의 공개 키
 
 */
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]

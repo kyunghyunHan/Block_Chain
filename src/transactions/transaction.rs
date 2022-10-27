@@ -92,7 +92,7 @@ impl Transaction {
         let mut tx_copy = self.trimmed_copy();
 
         for (idx, vin) in self.vin.iter_mut().enumerate() {
-            // 查找输入引用的交易
+            // 입력에서 참조하는 트랜잭션 찾기
             let prev_tx_option = bc.find_transaction(vin.get_txid());
             if prev_tx_option.is_none() {
                 panic!("ERROR: Previous transaction is not correct")
@@ -104,7 +104,7 @@ impl Transaction {
 
             tx_copy.vin[idx].set_pub_key(&vec![]);
 
-            // 使用私钥对数据签名
+            // 개인 키로 데이터 서명
             let signature = ecdsa_p256_sha256_sign_digest(pkcs8, tx_copy.id.as_bytes());
             vin.set_signature(signature);
         }
@@ -127,7 +127,7 @@ impl Transaction {
 
             tx_copy.vin[idx].set_pub_key(&vec![]);
 
-            // 使用公钥验证签名
+            // 공개키로 서명 확인
             let verify = ecdsa_p256_sha256_sign_verify(
                 vin.get_pub_key(),
                 vin.get_signature(),

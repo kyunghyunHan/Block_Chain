@@ -5,7 +5,7 @@ use crypto::ripemd160::Ripemd160;
 use ring::digest::{Context, SHA256};
 use ring::rand::SystemRandom;
 use ring::signature::{EcdsaKeyPair, ECDSA_P256_SHA256_FIXED, ECDSA_P256_SHA256_FIXED_SIGNING};
-
+//타원 곡선을 사용하여 개인 키를 생성하고 개인 키에서 키 쌍을 생성한 다음 키 쌍에서 공개 키를 파생
 pub fn new_private_key() -> Vec<u8> {
     let rng = SystemRandom::new();
     let pkcs8 = EcdsaKeyPair::generate_pkcs8(&ECDSA_P256_SHA256_FIXED_SIGNING, &rng).unwrap();
