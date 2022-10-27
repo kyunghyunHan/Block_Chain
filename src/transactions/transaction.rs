@@ -35,7 +35,7 @@ impl Transaction {
         to: &str,
         amount: i32,
         utxo_set: &UTXOSet<T>,
-        bc: &Blockchain,
+        bc: &Blockchain<T>,
     ) -> Self {
         let wallets = Wallets::new().unwrap();
         let wallet = wallets.get_wallet(from).unwrap();
@@ -78,7 +78,7 @@ impl Transaction {
         }
     }
 
-    fn sign(&mut self, bc: &Blockchain, pkcs8: &[u8]) {
+    fn sign<T: Storage>(&mut self, bc: &Blockchain<T>, pkcs8: &[u8]) {
         let mut tx_copy = self.trimmed_copy();
 
         for (idx, vin) in self.vin.iter_mut().enumerate() {
@@ -130,7 +130,7 @@ impl Transaction {
         true
     }
 
-    // 判断是否是 coinbase 交易
+    /// 判断是否是 coinbase 交易
     pub fn is_coinbase(&self) -> bool {
         self.vin.len() == 1 && self.vin[0].get_pub_key().len() == 0
     }

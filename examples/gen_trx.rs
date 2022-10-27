@@ -5,7 +5,7 @@ use block_chain::{Blockchain, SledDb, Transaction, UTXOSet, Wallets};
 fn main() {
     tracing_subscriber::fmt().init();
 
-    let justin_addr = "1M684nX5dTNQYi2ELSCazjyz5dgegJ3mVD";
+    let justin_addr = "1527MzPRt2eTh9GGrHKRX3qkCj6oA4w54F";
 
     let mut wallets = Wallets::new().unwrap();
     let bob_addr = wallets.create_wallet();
@@ -14,7 +14,7 @@ fn main() {
     let path = current_dir().unwrap().join("data");
     let storage = Arc::new(SledDb::new(path));
 
-    let mut bc = Blockchain::new(storage.clone(), justin_addr);
+    let mut bc = Blockchain::new(storage.clone());
     let utxos = UTXOSet::new(storage);
 
     let tx_1 = Transaction::new_utxo(justin_addr, &bob_addr, 4, &utxos, &bc);
