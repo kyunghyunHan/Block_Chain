@@ -13,7 +13,14 @@ use tokio::{
 use tracing::{error, info};
 
 use super::{create_swarm, BLOCK_TOPIC, PEER_ID, TRANX_TOPIC, WALLET_MAP};
-
+/*
+노드
+노드 노드의 기능에는 P2P 네트워크 노드의 메시지 모니터링 시작, 명령줄의 명령 메시지 및 다른 노드의 요청 메시지 처리가 포함
+BC: 블록체인
+utxos: UTXO 컬렉션
+msg_receiver: 다른 노드로부터 요청 메시지를 수신하는 채널의 수신자.
+swarm: rust-libp2p용
+*/
 pub struct Node<T = SledDb> {
     bc: Blockchain<T>,
     utxos: UTXOSet<T>,
@@ -38,7 +45,7 @@ impl<T: Storage> Node<T> {
         let peers = nodes.collect::<Vec<_>>();
         Ok(peers)
     }
-
+    //명령줄 처리를 위한 동기 명령
     async fn sync(&mut self) -> Result<()> {
         let version = Messages::Version {
             best_height: self.bc.get_height(),
@@ -54,7 +61,7 @@ impl<T: Storage> Node<T> {
 
         Ok(())
     }
-
+    //풀노드이기 때문에 여기에서는 간단하게 트랜잭션 생성과 마이닝을 함께 처리
     async fn mine_block(&mut self, from: &str, to: &str, amount: i32) -> Result<()> {
         let tx = Transaction::new_utxo(from, to, amount, &self.utxos, &self.bc);
         let txs = vec![tx];
@@ -70,7 +77,7 @@ impl<T: Storage> Node<T> {
             .unwrap();
         Ok(())
     }
-
+    //노드는 Version 메시지를 수신하고, 로컬 블록체인의 높이가 다른 노드의 높이보다 크면 블록체인 정보를 자신에게 보낸다.
     async fn process_version_msg(&mut self, best_height: usize, from_addr: String) -> Result<()> {
         if self.bc.get_height() > best_height {
             let blocks = Messages::Blocks {
@@ -87,7 +94,7 @@ impl<T: Storage> Node<T> {
         }
         Ok(())
     }
-
+    //노드는 블록체인 정보를 수신한 후 로컬 노드와 동기화
     async fn process_blocks_msg(
         &mut self,
         blocks: Vec<Block>,
@@ -121,6 +128,8 @@ impl<T: Storage> Node<T> {
                     let line = line?.expect("stdin closed");
                     let command = serde_json::from_str(line.as_str());
                     match command {
+                        //명령줄 메시지와 노드 메시지는 모두 serde_json을 사용하여 직렬화
+                        //블록체인 생성
                         Ok(cmd) => match cmd {
                             Commands::Genesis(addr) => {
                                 if self.bc.get_tip().is_empty() {

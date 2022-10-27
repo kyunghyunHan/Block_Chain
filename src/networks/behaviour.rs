@@ -10,7 +10,11 @@ use tokio::sync::mpsc;
 use tracing::{error, info};
 
 use crate::Messages;
-
+/*
+gossipsub: 메시지 전파를 위해 Gossip 프로토콜을 사용합니다.
+mdns: 노드 검색
+msg_sender: 다른 노드로부터 요청 메시지를 받은 후 채널로 보냅니다.
+*/
 #[derive(NetworkBehaviour)]
 #[behaviour(event_process = true)]
 pub struct BlockchainBehaviour {
