@@ -20,7 +20,7 @@ pub struct Transaction {
     vin: Vec<Txinput>,
     vout: Vec<Txoutput>,
 }
-
+//트랜잭션
 impl Transaction {
     // 채굴 보상, 거래 입력 없음
     pub fn new_coinbase(to: &str) -> Self {
@@ -32,6 +32,7 @@ impl Transaction {
             vin: vec![txin],
             vout: vec![txout],
         };
+        //트랜잭션 저장
         tx.set_hash();
 
         tx
@@ -140,7 +141,7 @@ impl Transaction {
         true
     }
 
-    /// 判断是否是 coinbase 交易
+    /// 코인베이스 트랜잭션인지 확인
     pub fn is_coinbase(&self) -> bool {
         self.vin.len() == 1 && self.vin[0].get_pub_key().len() == 0
     }

@@ -13,7 +13,7 @@ use crate::{
 타임스탬프:블록이 생성된 대략적인 시간,타임스탬프에 의존하고 현재 평균 블록 생성 비율이 목표 값과 얼마나 잘 일치하는지 결정하는 스마트 계약에서 사용
 prev_hash:이전시간
 nonce:작업증명을 계산하는데 사용하는 난수
-txs_hash:트랜잭션 집합의 해시 값
+txs_hash:트랜잭션 집합의 해시 값, Merkle 트리로 최적화
 bits:난이도,즉 블록 해시 값의 첫번쨰 비트가 0인수를 계산
 nonce:비트의 난이도를 충족시키기 위해 계산이 반복되는 횟수
  */
@@ -80,29 +80,29 @@ impl Block {
         let coinbase = Transaction::new_coinbase(genesis_addr);
         Self::new(&vec![coinbase], "", bits)
     }
-
+    //해시가져오기
     pub fn get_hash(&self) -> String {
         self.hash.clone()
     }
-
+    //블록헤더 가져오기
     pub fn get_header(&self) -> BlockHeader {
         self.header.clone()
     }
-
+    //nonce저장
     pub fn set_nonce(&mut self, nonce: usize) {
         self.header.nonce = nonce;
     }
-
+    //해시저장
     pub fn set_hash(&mut self, hash: String) {
         self.hash = hash;
     }
-
+    //트랜잭션 머클트리
     fn set_txs_hash(&mut self, txs: &[Transaction]) {
         if let Ok(txs_ser) = serialize(txs) {
             self.header.txs_hash = hash_to_str(&txs_ser);
         }
     }
-
+    //트랸쟉션들 자겨오기
     pub fn get_tranxs(&self) -> Vec<Transaction> {
         self.tranxs.clone()
     }
