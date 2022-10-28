@@ -5,7 +5,8 @@ use std::{
         Arc, RwLock,
     },
 };
-
+//범위가 지정된 구조화된 로깅 및 진단 시스템
+//
 use tracing::info;
 
 use crate::{error::BlockchainError, Block, SledDb, Storage, Transaction, Txoutput};
@@ -61,7 +62,9 @@ impl<T: Storage> Blockchain<T> {
         }
 
         let block = Block::new(txs, &self.tip.read().unwrap(), CURR_BITS);
+        //블록의 해시값 가져오기
         let hash = block.get_hash();
+        //현재 값에 더하여 이전 값을 반환합니다.
         self.height.fetch_add(1, Ordering::Relaxed);
         self.storage
             .update_blocks(&hash, &block, self.height.load(Ordering::Relaxed));
@@ -84,7 +87,7 @@ impl<T: Storage> Blockchain<T> {
         }
         Ok(())
     }
-
+    //찾기
     pub fn find_utxo(&self) -> HashMap<String, Vec<Txoutput>> {
         let mut utxo = HashMap::new();
         let mut spent_txos = HashMap::new();
@@ -121,7 +124,7 @@ impl<T: Storage> Blockchain<T> {
 
         utxo
     }
-
+    //트랜잭션 찾기
     pub fn find_transaction(&self, txid: String) -> Option<Transaction> {
         let blocks = self.storage.get_block_iter().unwrap();
         for block in blocks {
@@ -133,14 +136,14 @@ impl<T: Storage> Blockchain<T> {
         }
         None
     }
-
+    //블록 정보
     pub fn blocks_info(&self) {
         let blocks = self.storage.get_block_iter().unwrap();
         for block in blocks {
             info!("{:#?}", block);
         }
     }
-
+    //블록가져오기
     pub fn get_blocks(&self) -> Vec<Block> {
         self.storage.get_block_iter().unwrap().collect()
     }
