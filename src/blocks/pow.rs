@@ -46,6 +46,7 @@ impl ProofOfWork {
     }
     // 블록 헤더를 직렬화하기 위해 nonce 값을 설정
     fn prepare_data(block: &mut Block, nonce: usize) -> Result<Vec<u8>> {
+        //nonce값 설정
         block.set_nonce(nonce);
         Ok(serialize(&(block.get_header()))?)
     }

@@ -81,6 +81,7 @@ impl Block {
     //코인베이스 트랜잭션(coinbase transaction)은 새 블록의 첫 거래이고, 코인베이스(coinbase)는 이 거래의 '입력' 의 내용물
     //base기반
     pub fn create_genesis_block(bits: usize, genesis_addr: &str) -> Self {
+        //첫번쨰 데이터 입력
         let coinbase = Transaction::new_coinbase(genesis_addr);
         Self::new(&vec![coinbase], "", bits)
     }
