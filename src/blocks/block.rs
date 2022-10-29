@@ -59,6 +59,7 @@ pub struct Block {
 impl Block {
     pub fn new(txs: &[Transaction], prev_hash: &str, bits: usize) -> Self {
         let mut block = Block {
+            //새로운 블록헤더 생성
             header: BlockHeader::new(prev_hash, bits),
             tranxs: txs.to_vec(),
             hash: String::new(),
