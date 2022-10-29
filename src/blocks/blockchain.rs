@@ -1,5 +1,6 @@
 use std::{
     collections::HashMap,
+    //스레드 간의 기본 공유 메모리 통신을 제공하며 다른 동시 유형의 빌딩 블록
     sync::{
         atomic::{AtomicUsize, Ordering},
         Arc, RwLock,
@@ -43,7 +44,7 @@ impl<T: Storage> Blockchain<T> {
             }
         }
     }
-
+    //제네시스 블록 생성
     pub fn create_genesis_block(&mut self, genesis_addr: &str) {
         let genesis_block = Block::create_genesis_block(CURR_BITS, genesis_addr);
         let hash = genesis_block.get_hash();
@@ -73,7 +74,7 @@ impl<T: Storage> Blockchain<T> {
 
         block
     }
-
+    //블록추가
     pub fn add_block(&mut self, block: Block) -> Result<(), BlockchainError> {
         let hash = block.get_hash();
         if let Some(_) = self.storage.get_block(&hash)? {

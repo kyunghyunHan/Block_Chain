@@ -23,10 +23,11 @@ pub struct Transaction {
 //트랜잭션
 impl Transaction {
     // 채굴 보상, 거래 입력 없음
+    //코인베이스:거래보상기록
     pub fn new_coinbase(to: &str) -> Self {
         let txin = Txinput::default();
         let txout = Txoutput::new(SUBSIDY, to);
-
+        //트랙잭션 해시값,입출력
         let mut tx = Transaction {
             id: String::new(),
             vin: vec![txin],
