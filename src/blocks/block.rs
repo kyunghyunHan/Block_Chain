@@ -61,11 +61,14 @@ impl Block {
         let mut block = Block {
             //새로운 블록헤더 생성
             header: BlockHeader::new(prev_hash, bits),
+            //새로운 Vec에 복사
             tranxs: txs.to_vec(),
+            //
             hash: String::new(),
         };
+        //블록집합들 해시
         block.set_txs_hash(txs);
-
+        //pow
         let pow = ProofOfWork::new(bits);
         pow.run(&mut block);
 
@@ -98,6 +101,7 @@ impl Block {
         self.hash = hash;
     }
     //트랜잭션 머클트리
+    //트랜잭션들 해시
     fn set_txs_hash(&mut self, txs: &[Transaction]) {
         if let Ok(txs_ser) = serialize(txs) {
             self.header.txs_hash = hash_to_str(&txs_ser);

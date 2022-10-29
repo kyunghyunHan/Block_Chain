@@ -21,7 +21,7 @@ impl ProofOfWork {
 
         Self { target }
     }
-
+    //
     pub fn run(&self, block: &mut Block) {
         let mut nonce = 0;
         //계산 오버플로를 피하기 위해 MAX_NONCE를 사용하여 size::MAX로 설정
@@ -32,10 +32,13 @@ impl ProofOfWork {
                 let pre_hash_int = U256::from(hash_u);
                 // 계산된 해시 값이 목표보다 작으면 조건을 만족하고 루프를 점프 아웃한다.
                 // 그렇지 않으면 nonce가 1씩 증가하고 다음 해시 계산이 입력됩니다.
+                //이 방법은 (self 및 other에 대해) 보다 적은 수를 테스트하고 < 연산자에 의해 사용
                 if pre_hash_int.lt(&(self.target)) {
+                    //블록해시화
                     block.set_hash(hash_to_str(&pre_hash));
                     break;
                 } else {
+                    //틀리면 nonce +=1추가
                     nonce += 1;
                 }
             }
