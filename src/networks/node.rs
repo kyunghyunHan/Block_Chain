@@ -116,7 +116,7 @@ impl<T: Storage> Node<T> {
         self.utxos.reindex(&self.bc).unwrap();
         Ok(())
     }
-
+    //node start
     pub async fn start(&mut self) -> Result<()> {
         self.swarm.listen_on("/ip4/127.0.0.1/tcp/0".parse()?)?;
 

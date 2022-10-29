@@ -26,6 +26,7 @@ impl<T: Storage> UTXOSet<T> {
         public_key_hash: &[u8],
         amount: i32,
     ) -> (i32, HashMap<String, Vec<usize>>) {
+        //unspent_outputs이라는 새로운 해시맵 생성
         let mut unspent_outputs = HashMap::new();
         let mut accumulated = 0;
         let utxo_set = self.storage.get_utxo_set();
