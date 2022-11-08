@@ -399,10 +399,85 @@ Longest Blockchain Rule을 통해 Fork된 네트워크 를 하나로 유지시�
 
 ## Node(peer)
 
+- Explorer
+- Exchange
+
 ## Explorer
 
 - FULL
 - 검색 사이트
+
+## Exchange
+
+- 출금
+- 거래소 중앙서버
+- 거래서 Hotwallet
+- wallet이 tx생성
+- Fullnode에게 전달
+
+## Wallet
+
+- 키를 안전하게 관리하고 이를 통해서 사용자가 쉽게 거래를 생성하는 것을 지원
+
+1. 거래조회
+2. 사용자 잔액조회
+3. 신규 블록 생성알림
+4. 주소록관리
+5. 사용자 키 관리
+
+- web Wallet,App Wallet, Paper Wallet,Hardware Wallet
+
+#### !) Hardware Wallet
+
+- 가상 자산 고액 자산가들이 대부분 사용
+
+##### !)Samsung Wallet
+
+- 기본탑재 월렛 앱
+- 보안 안정공간(Trust Zone)인 Tee에서 사용자의 개인키를 보관관리
+- 개인키를 안전하기 보관 Export기능도 제공
+- TEE환경에서 동작하기 위해서 Wallet에서 보안 관련 설정이 추가로 진행
+
+#### COLD 와 HOT
+
+- COLD와 HOT은 인터넷환경과 연결된지 안됫는디 에따라 구분
+- Exchange는 사용자의 입출금이 활발하고 해킹의 위험이 항상 존재하기 떄문에 Cold와 Hot으로 구분
+
+## 키를방법하는 방법
+
+### 1)Nondeterministic Wallet(Random)
+
+- 100개의 랜텀키 생성 이를 한번씪만 사용
+- 주소를 한번만 사용하다보니 privacy보장이 높아짐
+- 주기적인 백업이 필요
+
+### 2)Hierarchical Deterministic Wallet
+
+- 하나의 seed값에서 생성된 Master Key를 중심으로 개인키 생성
+- 개인키 하나로 여러개의 주소를 관리 가능
+- 여러 Branch키를 생성 Branch마다 용도에 맞는 주소 그룹 분류 가능
+
+### 3) Mnemonic
+
+- 새로운 Seed관리방안
+- 개인키 분실시 복구가 불가능한것에 대한 방안
+- 개인키를 분실해도 Mnemonic을 통해 개인키 재 생성 가능
+
+## SPV
+
+- Bitcoin 사이즈가 커짐에 따라 이를 저장하기 힘든 Ligth-Weigt노드 IoT기기,스마트폰등에 node설치를 위해 나온 node 방안
+- 풀 노드로부터 MerkleTree와 Block Header만을 받아 전송바당 트랜잭션 검증
+
+## Merkle Pass
+
+- 필요한 것만 받아서 검증
+
+## Bloom Filter
+
+- SPV노드가 관심있는 트랜잭션ㅇ르 전달할떄 내가 관심있는 트랜잭션을 숨기고 정보를 전달받는 방법을 위한 기법
+- False Positive - 관심이 없는것은 보장할수 없다.
+
+- Ligth노드가 Fullnode에게 전달하여 Ligth가 관심있는 거래정보를 실제로 들어내지않고 전달가능
 
 ## 명령어
 
