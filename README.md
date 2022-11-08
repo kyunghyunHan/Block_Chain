@@ -328,7 +328,7 @@ header hash가 targe
 
 블록체인 네트워크 전체가 fork가 발생할 떄 하나의 블록체인만을 유지하기 위한 방법
 
-## Asic과
+## Asic
 
 특정용도에 맞게 맞춤 제작된 집적 회로를 의미
 
@@ -373,6 +373,36 @@ Mempool에 들어가고도 14일동안 처리되지 않고 남아 있는 Transac
 
 동시에 블록정답을 찾기에 성공하게 된경우를 분기되었다 또는 Fork라 부른다
 Longest Blockchain Rule을 통해 Fork된 네트워크 를 하나로 유지시키고 있다.
+
+- 비트코인 블록은 어떤 블록이 전달될지 모르기 때문에 Fork발생시 2개의 체인을 가지고 있으며 이중 LongestChain을 MainChain으로 유지
+
+- MainBranch가 Longest가 아님을 알게된 순간 SideBranch를 Main으로 변경하고 이데 대한 LevelDB업데이트가 이루어진다.
+- soft Fork는 모든 사용자가 Node Upgrade 를 하지 않아도 진행
+- Hard Fork는 모든 사용자가 Node Upgrade를 해야하고 하지 않는 경우 네트워크에서 분리
+
+## Soft Fork - Segwit
+
+- segwit은 비트코인 블록 사이즈로 인한 처리 성능을 제한을 해소하고 Transaction Malleability 문제를 해결하는 방안으로 제시
+
+- Soft Fork이기 떄문에 기존 Node가 업그레이드 하지 않아도 segwit Transaction처리 가능
+- 대표적인 ASIC채굴자들이 반대하면서 Network Fork분리가 발생됨
+
+## Hard Fork
+
+- 네트워크 분리가 발생한다.특정 기능을 제외한 대부분은 동일
+- 탈중앙화된 블록체인 특성 상 업그레이드에 찬성하는 쪽과 반대한 쪽이 나뉘기된다.
+- Hard Fork후에는 기존에 연결된 Node상에서 서로 인정하는 Block이 달라지게 되고 자연스럽게 각 네트워크에 참가하는 노드에 따라 네트워크 분리가 발생
+
+- 새로운 Segwit업그레이드가 ASIC에서는 사용이 불가능하기 떄문에
+- 채굴자측에서는 블록사이즈 문제는 블록 크기 증가로 가능하다고 하엿다.
+- 개발자 측에서는 Segwit적용이 블록체인 확장성 문제를 해결가능하다고함
+
+## Node(peer)
+
+## Explorer
+
+- FULL
+- 검색 사이트
 
 ## 명령어
 
