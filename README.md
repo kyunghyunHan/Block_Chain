@@ -26,7 +26,7 @@ RSA
 2. 부인방지 :개인키로 서명하기 떄문에 ->ECDSA
 3. 위변조방지 :거래 위변조를방지
 
-## Ecc
+## ECC
 
 공개키 암호기술 구현방식중 하나
 RSA에 비해 더 작은 데이터로 RSA와 비슷한 보안성능
@@ -51,16 +51,6 @@ n= 7일떄
 일정한 임이의 256비트
 단방향 알고리즘
 
-## newwork
-
-client server
-client -> Gateway -> was -> server -> database
-
-p2p Network
-
-- 어느서버에다가도 하던지 동일한 데이터를 받을수 있다
-- 토렌트
-
 ## TCP
 
 서버와 client간에 데이터를 신뢰성 있게 전달하기 위해 만들어진 프로토콜
@@ -70,38 +60,6 @@ p2p Network
 데이터 전송 과정에서 손실이나 순서가 바뀌는 경우 교정 및 순사 재조합 지원
 
 IPC소켓통신 방법으로 보통 지원
-
-## http
-
-get
-post
-put
-
-delete
-head 서버 헤드 정보 획득 요청
-options 서버 옵션 확인 요창
-
-## web socket
-
-양방향
-한별연결이 수립되면 클라이언트와 서버 자유롭게 데이터 전송가능
-실시간 시세 데이터 ,채팅 솔루션 등에 사용
-
-## RPC
-
-원격 서버의 함수를 함출 호출할수 있는 통신기술
-IDL을 사용해서 호출 규약을 정의하고 이를 통해 stub코드를 생성
-program 에서는 stud을 call함으로써 개발자는 네트워크의 대한 지식 업이 원격 함수 호출이 가능하다.
-
-## gRPC
-
-구글에서 개발한 RPC통신
-양방향 스트링 데이터 처리 MSA구조의 서비스에서 활용
-
-## protobuf
-
-grpc의 IDL protobuffer의 줄임말 프로그램 상에서 이를 사용하기 위해 .proto stub이 생성되어야 한다.json,xml통신보다 데이터 전송 크기가 작고 성능이 빠르다.
-proto3를 사용
 
 ## 블록 검증
 
@@ -152,22 +110,6 @@ add mempool
 - 아직 전달 받지 못한 block인 경우 header와 getdata를 모두 요처
   새로운 블록전달
 
-## 블록 구조
-
-Block size 4bytes <1mb
-BlockHeader 80bytes
-Transaction Counter 1~9 bytes
-Transaction variable
-
-## 블록헤더 구조
-
-version 버전정보
-previous block hash 이전 블록의 헤더 해시
-merkle root 트랜잭션들의 hashroot
-timestamp 블록 생성시간
-Difficulty Target pow의 어려움 정도
-nonce
-
 ## 블록생성
 
 mempool tx선택
@@ -183,40 +125,6 @@ block전파
 UTXO 사용 여부를 통해서 자산의 안정성을 확인
 input 사용자가 내는금액
 output 받는금액
-
-## 트랜잭션 내부구조
-
-version 현재값1
-Flag Witnesses Tx여부에 따라 달라짐
-Number of inputs input의 개수
-inputs input정보
-Number of Outputs ouput의 개수
-outputs output정보
-Witnesses Witnesses서명데이터
-Locktime 트랜잭션 시간 제한
-
-## input구조
-
-Transcation 해시 output이 포함된 txid
-output index Tx안에서 seq
-Unlocking-script size Unlocking-script크기
-Unlocking-script output을 input으로 바꾸는 서명정보
-sequence Number 기본값 oxffffff
-
-## output구조
-
-Amount 송금할금액 사토시 단위
-Locking-script size
-lockking-script 송금자의 정보가 담긴 데이터
-
-## Transaction Fee
-
-input 총힙에서 전체 output의 총합을 뺸 값
-블록에서 설명했듯니 채굴자들이 거래를 더 빠르게 하기 위해서 수수료를 높여야 한다
-
-## coinbase
-
-pow에서 채굴에 성공하게 되면 채굴에 성공한 채굴자에게 기본 보상 수수료와 거래 수수료를 보상으로 제공
 
 ## 거래방식
 
