@@ -9,7 +9,6 @@ use crate::{
 const SUBSIDY: i32 = 10;
 /*
 거래
-
 id: 트랜잭션 해시 값
 vin: 트랜잭션 입력 세트
 vout: 트랜잭션 출력 수집
