@@ -109,4 +109,24 @@
 - 블록 크기는 따로 제한이 업지만
 - GasLimit값이 존재하며 GasLimit이 넘는 Tx데이터는 들어갈수 없다.
 
-##
+## Transaction 구조
+
+- Transacion은 EOA가 EOA에게 Eth를 전송하거나 EOA가 CA를 호출할떄 사용되는 구조
+- 이 데이터는 블록체인 상에 기록
+
+- txType : 거래버전
+- copy :
+
+- chainID : 1001 같은 테스트넷,메인넷 구별
+- accessList :거의사용안함
+- data : 중요한정보,컨트렉트호출정보
+- gas: 가스 예상값 송금 21000고정
+- gasPrice: 가스 지정값
+- gasTipCap:
+- gasFeeCap:
+- value :송금하는 양
+- nonce: 이중지불방지
+- to:누구에게 보내는지 주소
+
+- rawSignatrueValues :서명데이터(v,r,s)
+- setSignatureValues :
