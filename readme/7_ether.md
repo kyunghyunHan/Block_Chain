@@ -239,3 +239,36 @@
 
 - 가장 많은 서브트리가 있는것을 체택
 - Uncleq블록이 많은 블록
+
+## Smart Contract
+
+- 서비스 Logic을 네트워크에 등록
+- 사용자는 Contract를 실행하게 되면 그 Contract의 State를 변경 조회
+
+## 개발언어
+
+- Solidity :가장 많이 사용
+- Vyper :python기반
+- Yul :어려운언어
+- FE
+
+## Compile Contract
+
+- 스마트컨트렉트를 컴파일하게되면
+- BYtecode:네트워크배포
+- OPCODE:gas계산용
+- ABI:로직을 제외하고 명시,통신
+
+## Contract접근
+
+- ABI,ContractAddress가필요
+
+## Contract 호출
+
+- 조회하는경우
+- 수정하게되면 state변경하게되면 트랙젹션 기록
+
+## Events
+
+- 스마트컨트렉트 상에서 사용자가 알림을 받고싶은 내용을 등록
+- 이를 통하여 거래의 생성이나 변경등을 확인
