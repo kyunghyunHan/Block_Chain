@@ -60,20 +60,51 @@
 ## 블록구조
 
 - 헤더
-- uncles
+- uncles : 사이드블록체인들
 - transactions
+  //caches 생성됫다가 사라짐
 - hash
 - size
-- ReceivedAt
+- ReceivedAt :
 - ReceivedFrom
 
 ## 블록헤더구조
 
 - ParentHash :이번블록의 해시
-- UncleHash:
-- CoinBase:
-- Root:
-- TxHash
-- ReceipHash
-- Bloom
-- Diffi
+- UncleHash: uncle해시
+- CoinBase: 코인베이스
+- Root:state Root
+- TxHash:트랜잭션패트리샤루트루트
+- ReceipHash:영수증 머클패트리샤루트
+- Bloom:logsBloom
+- Difficulty:난이더
+- Number:몇번쨰블록인지
+- GasLimit:가스리밋 ,
+- GasUsed:가스값의 총합
+- Time:현재시간
+- Extra:블록에 저장하고싶은 데이터
+- MixDigest:노력증명
+- Nonce
+
+- BaseFee:
+
+## 블록생성
+
+- Mempool Tx선택
+- EVM실행(이전트리 불로엄)
+- Transaction실행
+- Block Header생성
+- FindNonce,MixHash(ethHash)
+- Block전파
+
+## Uncle Block
+
+- 블록체인에서 Fork된 OrphanBlock
+- 블록헤더만 존재, 트랜잭션 없는 블록
+- GHOST Protocol로 인해 인정받는다,이를 채굴한 채굴자와 이를 포함한 채굴자 모두 보상을 얻게된다.
+- 사이드로 생성한것을 인정
+
+## Block Gas Limit
+
+- 블록 크기는 따로 제한이 업지만
+- GasLimit값이 존재하며 GasLimit이 넘는 Tx데이터는 들어갈수 없다.
