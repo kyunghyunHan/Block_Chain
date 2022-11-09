@@ -220,3 +220,22 @@
 
 - 비트코인은 2016블록마다
 - 이더리움은 매블록마다 13초마다
+
+## Block검증
+
+- 신규블록수신
+- 블록구조 일치여부
+- 재계산 Block header Hash ==Block header Hash
+- Block difficulty Check
+- Block GasLimit>30,000,000
+- Uncle Block Check
+- Transaction재실행
+- Event,Receipt생성
+- Bloom Filter 비교
+- Receipt Root,Merkle Root비교
+- LevelDB기록
+
+## Ghost Protocol
+
+- 가장 많은 서브트리가 있는것을 체택
+- Uncleq블록이 많은 블록
