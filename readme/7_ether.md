@@ -130,3 +130,93 @@
 
 - rawSignatrueValues :서명데이터(v,r,s)
 - setSignatureValues :
+
+## 서명(r,s,v)
+
+- r,s:실제서명값
+- v :복구값
+
+## Message 구조
+
+- CA가 CA를 호출할떄 발생하는 구조
+- to
+- from
+- nonce
+- amount
+- gasLimit
+- gasPrice
+- gasFeeCap
+- gasTipCap
+- data :함수호출하는정보
+- accessList
+- isFake
+
+## Receipt구조
+
+- type
+- PostState
+- Status :성공실패여부
+- CumulativeGasUsed :실제 연산 가스값
+- Bloom
+- Logs :이벤트 로그들
+
+- TxHash :트랜잭션해시
+- ContractAddress
+- GasUsed:예측가스값
+
+- BlockHash
+- BlockNumber
+- TransactionIndex :몇번쨰트랜잭션
+
+## Meta Transacion
+
+- User의 거래를 대신 실행해주는 거래방식
+- ERC20토큰전송을 할떄 사용자가 ERC20 CA호출을 위해서 지불해야하는 ETH수수료를 대행업체가 대신납부할수 있다.
+
+## EIP -2770
+
+- smart contract코드상에서 사용자의 서명 검증하는 부분
+
+## Gas
+
+- gas란 이더리움에서 수수료에 사용되는 값을 의미
+- smart Contract상 코드가 Compile되고 나오는 Byte Code를 OP_CODE테이블상에 지정된 Gas값으로 변환하여 수수료계산
+
+## Gas Limit(Used)
+
+- BlockGasLimit:해당 블록에 들어간 전체 트랜잭션 GasUsed합
+- Tracnsaction GasUsed:해당 트랜잭션 실행에 들어간 Gas양의 합
+
+## GasPrice
+
+- 해당 트랜잭션을 얼마나 빠르게 실행할지를 결저아기 위한 값
+
+## Gas계산법
+
+- 거래수수료 :GasLimit \* GasPrice
+- Block 보상:채굴보상+거래수수료 총합
+- Uncle보상:특정 계산
+
+## GasRefund
+
+- Run Smart Contract:예상되는 가스 금액을 먼저계산하여 지출한뒤 실제 사용된 가스 제외 남은금액 리턴
+- Out of Gas:가스가 부족한 경우 리턴
+  - Selfdestruct:
+
+## EIP-1559
+
+- gas price값의 변동성이 너무커 일반사영자들이 사용하기 어려울 떄 지불할수 있는 수수료의 범위를 지정하고 최소값으로 지불할수 있는 방안
+
+## Burn Fee
+
+- EIP - 1559 의 경우 소각되는 ETH 양이만아 가격이 줄어드는것을 방지
+
+## Ethash
+
+- 이더리움의 pos
+- Dag추가
+
+## Difficulty
+
+- 비트코인은 2016블록마다
+- 이더리움은 매블록마다 13초마다
