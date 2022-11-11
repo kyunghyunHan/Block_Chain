@@ -323,7 +323,7 @@ Longest Blockchain Rule을 통해 Fork된 네트워크 를 하나로 유지시�
 - wallet이 tx생성
 - Fullnode에게 전달
 
-## Wallet
+## Wallet(지갑)
 
 - 키를 안전하게 관리하고 이를 통해서 사용자가 쉽게 거래를 생성하는 것을 지원
 
