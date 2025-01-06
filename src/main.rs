@@ -16,7 +16,7 @@ fn main() {
         println!("Data: {}", String::from_utf8_lossy(&block.data));
         println!("Hash: {:?}", hex::encode(&block.hash));
 
-        let pow = ProofOfWork::new(block); // block을 복제하여 사용
+        let pow = ProofOfWork::new(&block, 32); // block을 복제하여 사용
         println!("PoW: {}", pow.validate());
         println!();
     }
