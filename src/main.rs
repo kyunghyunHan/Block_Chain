@@ -1,6 +1,6 @@
-use std::time::{SystemTime, UNIX_EPOCH};
-use sha2::{Sha256, Digest};
 use hex;
+use sha2::{Digest, Sha256};
+use std::time::{SystemTime, UNIX_EPOCH};
 
 // Block 구조체 정의
 #[derive(Debug)]
@@ -27,14 +27,14 @@ impl Block {
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_secs() as i64;
-        
+
         let mut block = Block {
             timestamp,
             data: data.as_bytes().to_vec(),
             prev_block_hash,
             hash: vec![],
         };
-        
+
         block.set_hash();
         block
     }
